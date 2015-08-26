@@ -86,8 +86,8 @@ namespace LOAssetFramework
 				return null;
 			}
 
-			//如果WWW缓存策略中包含有对应的关键字,则返回true
-			if (LOAssetCache.InCache (assetBundleName)) {
+			//如果WWW缓存策略中包含有对应的关键字,则返回null
+			if (LOAssetCache.InWWWCache (assetBundleName)) {
 				return null;
 			}
 			//创建下载链接
@@ -102,16 +102,14 @@ namespace LOAssetFramework
 		IEnumerator LoadDependencies(string assetBundleName)
 		{
 			if (this.manifest == null) {
-				yield return null;
+				yield break;
 			}
 			// 获取依赖包裹
 			string[] dependencies = this.manifest.GetAllDependencies(assetBundleName);
 
-			Debug.Log(dependencies.Length);
-
 			if (dependencies.Length == 0)
 			{
-				yield return null;
+				yield break;
 			}
 
 			// 记录并且加载所有的依赖包裹
@@ -142,7 +140,7 @@ namespace LOAssetFramework
 		/// <summary>
 		/// 异步加载资源
 		/// </summary>
-		public IEnumerator LoadAssetAsync (string assetBundleName, string assetName, System.Type type)
+		public IEnumerator LoadAssetAsync (string assetBundleName)
 		{
 			//开始加载包裹
 			yield return StartCoroutine(LoadAssetBundle (assetBundleName));
@@ -151,7 +149,7 @@ namespace LOAssetFramework
 		/// <summary>
 		/// 异步加载场景
 		/// </summary>
-		public IEnumerator LoadLevelAsync (string assetBundleName, string levelName, bool isAdditive)
+		public IEnumerator LoadLevelAsync (string assetBundleName)
 		{
 			//加载资源包
 			yield return StartCoroutine(LoadAssetBundle (assetBundleName));

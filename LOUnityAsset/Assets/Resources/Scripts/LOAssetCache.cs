@@ -74,6 +74,12 @@ namespace LOAssetFramework
 		{
 			return LOAssetCache.BundleCache.ContainsKey(assetbundlename);
 		}
+
+		internal static bool InWWWCache(string assetbundlename)
+		{
+			return LOAssetCache.WwwCache.ContainsKey(assetbundlename);
+		}
+
 		#endregion
 
 
@@ -117,7 +123,7 @@ namespace LOAssetFramework
 		}
 		#endregion
 
-		#region GetFunction
+		#region Setter`Getter
 		internal static WWW GetWWWCache(string key)
 		{
 			WWW www;
@@ -185,6 +191,7 @@ namespace LOAssetFramework
 			foreach (var keyValue in LOAssetCache.WwwCache)
 			{
 				WWW download = keyValue.Value;
+
 				string m_bundleName = keyValue.Key;
 				
 				// 下载失败

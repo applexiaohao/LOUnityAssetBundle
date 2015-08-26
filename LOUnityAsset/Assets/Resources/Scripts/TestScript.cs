@@ -9,7 +9,7 @@ public class TestScript : MonoBehaviour {
 	/// </summary>
 	protected IEnumerator Load (string assetBundleName, string level)
 	{
-		IEnumerator b = da.LoadLevelAsync(assetBundleName, level, false);
+		IEnumerator b = da.LoadLevelAsync(assetBundleName);
 		yield return StartCoroutine(b);
 		Application.LoadLevel(level);
 	}
